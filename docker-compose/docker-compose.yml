@@ -21,6 +21,8 @@ services:
         links: 
             - auth
         environment:
+            HOST_IP: ${HOST_IP}
+            AUTH_SERVER_URL: ${AUTH_SERVER_URL}
             JAVA_OPTS: "
                 -Ddb.driver=org.postgresql.Driver
                 -Ddb.username=alfresco
@@ -50,7 +52,7 @@ services:
                 -Dauthentication.chain=identity-service1:identity-service,alfrescoNtlm1:alfrescoNtlm
                 -Didentity-service.enable-basic-auth=true
                 -Didentity-service.authentication.validation.failure.silent=false
-                -Didentity-service.auth-server-url=http://auth:8080/auth
+                -Didentity-service.auth-server-url=${AUTH_SERVER_URL}
                 -Didentity-service.realm=alfresco
                 -Didentity-service.resource=alfresco
                 "
@@ -173,6 +175,12 @@ services:
         mem_limit: 128m
         environment:
             BASEPATH: ./
+            APP_CONFIG_OAUTH2_HOST: ${APP_CONFIG_OAUTH2_HOST}
+            APP_CONFIG_AUTH_TYPE: ${APP_CONFIG_AUTH_TYPE}
+            APP_CONFIG_OAUTH2_CLIENTID: ${APP_CONFIG_OAUTH2_CLIENTID}
+            APP_CONFIG_OAUTH2_REDIRECT_SILENT_IFRAME_URI: ${APP_CONFIG_OAUTH2_REDIRECT_SILENT_IFRAME_URI}
+            APP_CONFIG_OAUTH2_REDIRECT_LOGIN: ${APP_CONFIG_OAUTH2_REDIRECT_LOGIN}
+            APP_CONFIG_OAUTH2_REDIRECT_LOGOUT: ${APP_CONFIG_OAUTH2_REDIRECT_LOGOUT}
 
     proxy:
         image: quay.io/alfresco/alfresco-acs-nginx:2.2.0
