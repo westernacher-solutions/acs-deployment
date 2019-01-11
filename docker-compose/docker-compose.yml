@@ -16,6 +16,10 @@ services:
     alfresco:
         image: alfresco/alfresco-content-repository:6.1.0-RC3
         mem_limit: 1700m
+        depends_on:
+            - auth
+        links: 
+            - auth
         environment:
             JAVA_OPTS: "
                 -Ddb.driver=org.postgresql.Driver
@@ -43,6 +47,12 @@ services:
                 -Dtransform.service.enabled=true
                 -Dcsrf.filter.enabled=false
                 -Xms1500m -Xmx1500m
+                -Dauthentication.chain=identity-service1:identity-service,alfrescoNtlm1:alfrescoNtlm
+                -Didentity-service.enable-basic-auth=true
+                -Didentity-service.authentication.validation.failure.silent=false
+                -Didentity-service.auth-server-url=http://auth:8080/auth
+                -Didentity-service.realm=alfresco
+                -Didentity-service.resource=alfresco
                 "
 
     transform-router:
@@ -176,6 +186,16 @@ services:
             - digital-workspace
             - alfresco
             - share
+    
+    auth:
+        image: denysvuika/alfresco-identity-service:latest
+        environment:
+            - KEYCLOAK_USER=admin
+            - KEYCLOAK_PASSWORD=admin
+            - KEYCLOAK_IMPORT=/tmp/alfresco-realm.json
+            - DB_VENDOR=h2
+        ports:
+            - 8081:8080
 
 volumes:
     shared-file-store-volume:
