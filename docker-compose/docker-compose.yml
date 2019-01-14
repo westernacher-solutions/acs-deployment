@@ -18,8 +18,6 @@ services:
         mem_limit: 1700m
         depends_on:
             - auth
-        links: 
-            - auth
         environment:
             HOST_IP: ${HOST_IP}
             AUTH_SERVER_URL: ${AUTH_SERVER_URL}
@@ -196,7 +194,7 @@ services:
             - share
     
     auth:
-        image: denysvuika/alfresco-identity-service:latest
+        image: quay.io/alfresco/alfresco-identity-service
         environment:
             - KEYCLOAK_USER=admin
             - KEYCLOAK_PASSWORD=admin
