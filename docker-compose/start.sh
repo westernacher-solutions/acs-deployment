@@ -4,7 +4,7 @@ export AUTH_SERVER_URL="http://${HOST_IP}:8081/auth"
 export APP_CONFIG_AUTH_TYPE="OAUTH"
 export APP_CONFIG_OAUTH2_HOST="http://${HOST_IP}:8081/auth/realms/alfresco"
 export APP_CONFIG_OAUTH2_CLIENTID="alfresco"
-export APP_CONFIG_OAUTH2_REDIRECT_SILENT_IFRAME_URI="./assets/silent-refresh.html"
+export APP_CONFIG_OAUTH2_REDIRECT_SILENT_IFRAME_URI="http://${HOST_IP}:8080/workspace/assets/silent-refresh.html"
 export APP_CONFIG_OAUTH2_REDIRECT_LOGIN="/workspace"
 export APP_CONFIG_OAUTH2_REDIRECT_LOGOUT="/workspace/logout"
 
