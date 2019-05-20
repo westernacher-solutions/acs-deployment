@@ -28,3 +28,4 @@ kubectl get service intentional-swan-nginx-ingress-controller -o jsonpath={.spec
 kubectl apply -f ../persistent-volume.yaml
 helm install alfresco-content-services --set externalProtocol="http" --set externalHost="192.168.99.100" --set externalPort="31845" --set registryPullSecrets=quay.io
 open https://192.168.99.100:30832/alfresco
+* alfresco-digital-workspace because credential config does not work and it is probably not needed
