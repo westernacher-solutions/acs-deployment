@@ -1,0 +1,28 @@
+installatian based on microk8s:
+
+Voraussetzung: Ubuntu 18.04 mit 16 GB RAM
+
+Randbedingungen: korrekte SSL-Zertifikate sind kein Ziel
+
+snap install microk8s --classic
+snap alias microk8s.kubectl kubectl
+microk8s.enable dns
+microk8s.enable ingress
+microk8s.enable metrics-server
+microk8s.enable storage
+
+snap install helm --classic
+helm init
+helm repo add alfresco-stable https://kubernetes-charts.alfresco.com/stable
+
+git clone https://gitlab.westernacher.com/torsten.werner/acs-deployment.git
+cd acs-deployment
+git checkout --track remotes/origin/1-copy-quay-io-images-to-bnotk-and-document-the-steps
+
+
+kubectl create secret docker-registry quay.io --docker-server=quay.io --docker-username=<login> --docker-password=<password>
+cd helm/alfresco-content-services/
+helm dependency update
+cd ..
+helm install alfresco-content-services --set externalProtocol="https" --set externalHost="<95.217.1.233>" --set externalPort="443" --set registryPullSecrets=quay.io
+kubectl get pods --watch
