@@ -1,0 +1,10 @@
+prep:
+brew install kubernetes-helm
+helm init --client-only
+helm repo add alfresco-stable https://kubernetes-charts.alfresco.com/stable
+helm dependency update
+
+copy images – must start with prefix com.westernacher:
+docker pull quay.io/alfresco/alfresco-transform-router:1.0.2.1
+docker tag quay.io/alfresco/alfresco-transform-router:1.0.2.1 westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-transform-router:1.0.2.1
+docker push westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-transform-router:1.0.2.1
