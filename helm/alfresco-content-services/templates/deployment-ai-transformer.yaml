@@ -57,6 +57,7 @@ spec:
           ports:
               - containerPort: {{ .Values.aiTransformer.image.internalPort }}
           resources:
+{{ toYaml .Values.aiTransformer.resources | indent 12 }}
           readinessProbe:
             httpGet:
               path: /ready
