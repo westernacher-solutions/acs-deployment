@@ -26,3 +26,8 @@ helm dependency update
 cd ..
 helm install alfresco-content-services --set externalProtocol="https" --set externalHost="<95.217.1.233>" --set externalPort="443" --set registryPullSecrets=quay.io
 kubectl get pods --watch
+
+
+Ergebnis:
+
+kubectl get pods -o jsonpath='{.items[*].spec.containers[*].image}'
