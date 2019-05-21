@@ -1,7 +1,9 @@
 #!/bin/sh
 
-/tiller &
-sleep 1
+set -x
+PATH=$PATH:/
+helm init --canary-image
+sleep 8
 cd helm
-/helm install alfresco-content-services --set alfresco-infrastructure.nginx-ingress.enabled=false "$@"
-killall tiller
+helm install alfresco-content-services --set alfresco-infrastructure.nginx-ingress.enabled=false "$@"
+#helm reset --force
