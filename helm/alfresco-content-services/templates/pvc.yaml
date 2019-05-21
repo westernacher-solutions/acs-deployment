@@ -1,0 +1,12 @@
+# copied from https://github.com/Alfresco/alfresco-infrastructure-deployment/blob/master/helm/alfresco-infrastructure
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: alfresco-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.infrastructure.baseSize | quote }}

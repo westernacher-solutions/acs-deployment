@@ -436,3 +436,7 @@ s3connector:
 # or uncomment the following line if you don't want/need to pass it as a parameter on every install command :
 # registryPullSecrets: private-repo-registry-secret
 # for more information: https://github.com/Alfresco/alfresco-anaxes-shipyard/blob/master/SECRETS.md
+
+# copied from https://github.com/Alfresco/alfresco-infrastructure-deployment/blob/master/helm/alfresco-infrastructure
+infrastructure:
+  baseSize: 20Gi
