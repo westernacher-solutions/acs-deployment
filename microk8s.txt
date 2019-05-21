@@ -24,7 +24,7 @@ kubectl create secret docker-registry quay.io --docker-server=quay.io --docker-u
 cd helm/alfresco-content-services/
 helm dependency update
 cd ..
-helm install alfresco-content-services --set externalProtocol="https" --set externalHost="<95.217.1.233>" --set externalPort="443" --set registryPullSecrets=quay.io
+helm install alfresco-content-services --set externalProtocol="https" --set externalHost="<95.217.1.233>" --set externalPort="443" --set registryPullSecrets=quay.io --set alfresco-infrastructure.nginx-ingress.enabled=false
 kubectl get pods --watch
 
 
