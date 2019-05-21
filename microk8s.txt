@@ -21,10 +21,13 @@ git checkout --track remotes/origin/1-copy-quay-io-images-to-bnotk-and-document-
 
 
 kubectl create secret docker-registry quay.io --docker-server=quay.io --docker-username=<login> --docker-password=<password>
+kubectl create secret docker-registry gitlab.westernacher.com --docker-server=registry.gitlab.westernacher.com --docker-username=<login> --docker-password=<password>
+kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "quay.io"},{"name": "gitlab.westernacher.com"}]}'
+
 cd helm/alfresco-content-services/
 helm dependency update
 cd ..
-helm install alfresco-content-services --set externalProtocol="https" --set externalHost="<95.217.1.233>" --set externalPort="443" --set registryPullSecrets=quay.io --set alfresco-infrastructure.nginx-ingress.enabled=false
+helm install alfresco-content-services --set externalProtocol="https" --set externalHost="<95.217.1.233>" --set externalPort="443" --set alfresco-infrastructure.nginx-ingress.enabled=false
 kubectl get pods --watch
 
 
@@ -55,3 +58,6 @@ postgres:10.1
 # from microk8s.enable ingress
 quay.io/kubernetes-ingress-controller/nginx-ingress-controller-amd64:0.22.0
 gcr.io/google_containers/defaultbackend-amd64:1.4
+
+
+kubectl run -it --rm alfresco-installer --image registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1 --image-pull-policy Always --restart Never -- --set externalProtocol="https" --set externalHost="95.217.1.233" --set externalPort="443"
