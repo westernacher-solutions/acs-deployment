@@ -17,9 +17,11 @@ spec:
         release: {{ .Release.Name }}
         component: transformrouter
     spec:
+      {{- if .Values.registryPullSecrets }}
       # only set this secret if a private docker registry variable is defined
       imagePullSecrets:
         - name: {{ .Values.registryPullSecrets }}
+      {{- end }}
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
