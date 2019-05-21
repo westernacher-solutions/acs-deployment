@@ -1,3 +1,4 @@
+# helm repo add alfresco-stable https://kubernetes-charts.alfresco.com/stable
 # https://github.com/helm/helm/issues/2998
 # (cd helm/alfresco-content-services/ && helm dependency update)
 # docker build -t registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1 .
