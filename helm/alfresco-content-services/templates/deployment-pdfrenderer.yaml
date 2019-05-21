@@ -47,7 +47,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.pdfrenderer.image.repository }}:{{ .Values.pdfrenderer.image.tag }}"
+          image: "{{ .Values.imageprefix }}{{ .Values.pdfrenderer.image.repository }}:{{ .Values.pdfrenderer.image.tag }}"
           imagePullPolicy: {{ .Values.pdfrenderer.image.pullPolicy }}
           envFrom:
           - configMapRef:

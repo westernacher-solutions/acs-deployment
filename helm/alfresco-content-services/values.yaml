@@ -1,5 +1,9 @@
 # This is a YAML-formatted file.  Declare variables to be passed into your templates.
 
+# prefix for enterprise images
+# either quay.io/alfresco/ or westernacher-docker.artifactory.test.bnotk.net/com.westernacher.
+imageprefix: quay.io/alfresco/
+
 # ACS will be created in a k8s cluster with a minimum of 16GB memory to split among below nodes:
 # 2 x repository, 1 x share, 1 x transformers (pdfrenderer, imagemagick, libreoffice, tika) and 1 x postgresql
 
@@ -60,7 +64,7 @@ apiexplorer:
 transformrouter:
   replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-transform-router
+    repository: alfresco-transform-router
     tag: "1.0.2.1"
     pullPolicy: Always
     internalPort: 8095
@@ -84,7 +88,7 @@ transformrouter:
 pdfrenderer:
   replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-pdf-renderer
+    repository: alfresco-pdf-renderer
     tag: "2.0.17"
     pullPolicy: Always
     internalPort: 8090
@@ -117,7 +121,7 @@ pdfrenderer:
 imagemagick:
   replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-imagemagick
+    repository: alfresco-imagemagick
     tag: "2.0.17"
     pullPolicy: Always
     internalPort: 8090
@@ -150,7 +154,7 @@ imagemagick:
 libreoffice:
   replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-libreoffice
+    repository: alfresco-libreoffice
     tag: "2.0.17"
     pullPolicy: Always
     internalPort: 8090
@@ -183,7 +187,7 @@ libreoffice:
 tika:
   replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-tika
+    repository: alfresco-tika
     tag: "2.0.17"
     pullPolicy: Always
     internalPort: 8090
@@ -214,7 +218,7 @@ tika:
 aiTransformer:
   replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-ai-docker-engine
+    repository: alfresco-ai-docker-engine
     tag: "1.0.1"
     pullPolicy: Always
     internalPort: 8090
