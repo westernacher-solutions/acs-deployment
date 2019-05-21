@@ -28,6 +28,11 @@ helm install alfresco-content-services --set externalProtocol="https" --set exte
 kubectl get pods --watch
 
 
+  Share: https://95.217.1.233:443/share
+  Content: https://95.217.1.233:443/alfresco
+  Api-Explorer: https://95.217.1.233:443/api-explorer
+
+
 Ergebnis:
 
 kubectl get pods -o jsonpath='{.items[*].spec.containers[*].image}'
