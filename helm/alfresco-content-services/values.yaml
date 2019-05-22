@@ -108,7 +108,7 @@ pdfrenderer:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 150
@@ -141,7 +141,7 @@ imagemagick:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 30
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 150
@@ -174,7 +174,7 @@ libreoffice:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 250
@@ -207,7 +207,7 @@ tika:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 400
@@ -273,7 +273,7 @@ filestore:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 150
