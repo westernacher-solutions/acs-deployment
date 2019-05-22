@@ -11,32 +11,19 @@ microk8s.enable ingress
 microk8s.enable metrics-server
 microk8s.enable storage
 
-snap install helm --classic
-helm init
-helm repo add alfresco-stable https://kubernetes-charts.alfresco.com/stable
-
-git clone https://gitlab.westernacher.com/torsten.werner/acs-deployment.git
-cd acs-deployment
-git checkout --track remotes/origin/1-copy-quay-io-images-to-bnotk-and-document-the-steps
-
-
 kubectl create secret docker-registry quay.io --docker-server=quay.io --docker-username=<login> --docker-password=<password>
 kubectl create secret docker-registry gitlab.westernacher.com --docker-server=registry.gitlab.westernacher.com --docker-username=<login> --docker-password=<password>
 kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "quay.io"},{"name": "gitlab.westernacher.com"}]}'
 
-cd helm/alfresco-content-services/
-helm dependency update
-cd ..
-helm install alfresco-content-services --set externalProtocol="https" --set externalHost="<95.217.1.233>" --set externalPort="443" --set alfresco-infrastructure.nginx-ingress.enabled=false
-kubectl get pods --watch
+kubectl run -it --rm alfresco-installer --image registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1 --image-pull-policy Always --restart Never -- --set externalProtocol="https" --set externalHost="95.217.1.233" --set externalPort="443"
 
+kubectl get pods --watch
 
   Share: https://95.217.1.233:443/share
   Content: https://95.217.1.233:443/alfresco
   Api-Explorer: https://95.217.1.233:443/api-explorer
 
-
-Ergebnis:
+Images auflisten:
 
 kubectl get pods -o jsonpath='{.items[*].spec.containers[*].image}'
 
@@ -60,4 +47,12 @@ quay.io/kubernetes-ingress-controller/nginx-ingress-controller-amd64:0.22.0
 gcr.io/google_containers/defaultbackend-amd64:1.4
 
 
-kubectl run -it --rm alfresco-installer --image registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1 --image-pull-policy Always --restart Never -- --set externalProtocol="https" --set externalHost="95.217.1.233" --set externalPort="443"
+# import both BNotK certificates from https://wiki.westernacher.com/x/hg9WAw into local keystore, edit trust settings for ssl, and restart docker
+
+docker login -u vpn-werner westernacher-docker.artifactory.test.bnotk.net
+
+# copy images – target names must start with prefix com.westernacher:
+
+docker pull quay.io/alfresco/alfresco-transform-router:1.0.2.1
+docker tag quay.io/alfresco/alfresco-transform-router:1.0.2.1 westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-transform-router:1.0.2.1
+docker push westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-transform-router:1.0.2.1
