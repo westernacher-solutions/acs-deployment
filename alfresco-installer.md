@@ -62,3 +62,11 @@ Die IP-Adresse ist natürlich wieder anzupassen.
 - Content: https://95.217.1.233:443/alfresco
 
 Die Password für den Benutzer _admin_ lautet _admin_.
+
+# Deinstallation der Alfresco-Komponenten
+
+Zum Deinstallieren kann das folgende Kommando ausgeführt werden. **Achtung:** es erfolgt keine Rückfrage.
+
+    kubectl run --command -it --rm alfresco-installer \
+        --image registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1 \
+        --image-pull-policy Always --restart Never -- /alfresco-installer/alfresco-uninstaller.sh
