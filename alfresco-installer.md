@@ -48,7 +48,8 @@ Falls es neuere Versionen des Installers gibt, muss das Tag beim Image ggf. aktu
 
     kubectl run -it --rm alfresco-installer \
         --image westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-installer:0.1 \
-        ---restart Never -- --set externalProtocol="https" --set externalHost="95.217.1.233" --set externalPort="443"
+        --restart Never -- --set externalProtocol="https" --set externalHost="95.217.1.233" --set externalPort="443" \
+        --set imageprefix="westernacher-docker.artifactory.test.bnotk.net/com.westernacher."
 
 Sobald der Installer sich beendet hat, kann man mit folgendem Kommando den Status der Pods bzw. Container prüfen:
 
