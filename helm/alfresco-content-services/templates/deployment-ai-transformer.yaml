@@ -48,7 +48,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.aiTransformer.image.repository }}:{{ .Values.aiTransformer.image.tag }}"
+          image: "{{ .Values.imageprefix }}{{ .Values.aiTransformer.image.repository }}:{{ .Values.aiTransformer.image.tag }}"
           imagePullPolicy: {{ .Values.aiTransformer.image.pullPolicy }}
           envFrom:
           - configMapRef:
@@ -57,6 +57,7 @@ spec:
           ports:
               - containerPort: {{ .Values.aiTransformer.image.internalPort }}
           resources:
+{{ toYaml .Values.aiTransformer.resources | indent 12 }}
           readinessProbe:
             httpGet:
               path: /ready

@@ -1,5 +1,9 @@
 # This is a YAML-formatted file.  Declare variables to be passed into your templates.
 
+# prefix for enterprise images
+# either quay.io/alfresco/ or westernacher-docker.artifactory.test.bnotk.net/com.westernacher.
+imageprefix: quay.io/alfresco/
+
 # ACS will be created in a k8s cluster with a minimum of 16GB memory to split among below nodes:
 # 2 x repository, 1 x share, 1 x transformers (pdfrenderer, imagemagick, libreoffice, tika) and 1 x postgresql
 
@@ -10,7 +14,7 @@
 # Hence, setting up explicit Container memory and then assigning a percentage of it to the JVM for performance tuning.
 
 repository:
-  replicaCount: 2
+  replicaCount: 1
   image:
     repository: alfresco/alfresco-content-repository
     tag: "6.1.0"
@@ -58,9 +62,9 @@ apiexplorer:
     path: /api-explorer
 
 transformrouter:
-  replicaCount: 2
+  replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-transform-router
+    repository: alfresco-transform-router
     tag: "1.0.2.1"
     pullPolicy: Always
     internalPort: 8095
@@ -82,9 +86,9 @@ transformrouter:
 # Declares the alfresco-pdf-renderer service used by the content repository
 # to transform pdf files
 pdfrenderer:
-  replicaCount: 2
+  replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-pdf-renderer
+    repository: alfresco-pdf-renderer
     tag: "2.0.17"
     pullPolicy: Always
     internalPort: 8090
@@ -104,7 +108,7 @@ pdfrenderer:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 150
@@ -115,9 +119,9 @@ pdfrenderer:
 # Declares the alfresco-imagemagick service used by the content repository
 # to transform image files
 imagemagick:
-  replicaCount: 2
+  replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-imagemagick
+    repository: alfresco-imagemagick
     tag: "2.0.17"
     pullPolicy: Always
     internalPort: 8090
@@ -137,7 +141,7 @@ imagemagick:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 30
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 150
@@ -148,9 +152,9 @@ imagemagick:
 # Declares the alfresco-libreoffice service used by the content repository
 # to transform office files
 libreoffice:
-  replicaCount: 2
+  replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-libreoffice
+    repository: alfresco-libreoffice
     tag: "2.0.17"
     pullPolicy: Always
     internalPort: 8090
@@ -170,7 +174,7 @@ libreoffice:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 250
@@ -181,9 +185,9 @@ libreoffice:
 # Declares the alfresco-tika service used by the content repository
 # to transform office files
 tika:
-  replicaCount: 2
+  replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-tika
+    repository: alfresco-tika
     tag: "2.0.17"
     pullPolicy: Always
     internalPort: 8090
@@ -203,7 +207,7 @@ tika:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 400
@@ -212,9 +216,9 @@ tika:
     maxTransformSeconds: 1800
 
 aiTransformer:
-  replicaCount: 2
+  replicaCount: 1
   image:
-    repository: quay.io/alfresco/alfresco-ai-docker-engine
+    repository: alfresco-ai-docker-engine
     tag: "1.0.1"
     pullPolicy: Always
     internalPort: 8090
@@ -269,7 +273,7 @@ filestore:
     periodSeconds: 60
     timeoutSeconds: 10
   livenessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     periodSeconds: 20
     timeoutSeconds: 10
     livenessPercent: 150
@@ -363,7 +367,7 @@ alfresco-search:
     enabled: false
 
 alfresco-digital-workspace:
-  enabled: true
+  enabled: false
   ingress:
     path: /workspace
     applicationBasePath: ./

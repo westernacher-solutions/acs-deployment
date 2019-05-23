@@ -1,0 +1,23 @@
+# starts the alfresco demo installer, please update the external ip address:
+# kubectl apply -f alfresco-installer.yaml
+# kubectl delete -f alfresco-installer.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: alfresco-installer
+  name: alfresco-installer
+spec:
+  containers:
+    - args:
+        - --set
+        - externalProtocol=https
+        - --set
+        - externalHost=95.217.1.233
+        - --set
+        - externalPort=443
+      image: registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1
+      imagePullPolicy: Always
+      name: alfresco-installer
+  restartPolicy: Never
