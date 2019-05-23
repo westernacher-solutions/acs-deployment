@@ -4,6 +4,9 @@
 # docker build -t registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1 .
 # docker push registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1
 
+# docker tag registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1 westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-installer:0.1
+# docker push westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-installer:0.1
+
 FROM gcr.io/kubernetes-helm/tiller:canary
 USER root
 RUN mkdir /alfresco-installer

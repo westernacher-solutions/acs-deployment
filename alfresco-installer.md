@@ -68,5 +68,5 @@ Die Password für den Benutzer _admin_ lautet _admin_.
 Zum Deinstallieren kann das folgende Kommando ausgeführt werden. **Achtung:** es erfolgt keine Rückfrage.
 
     kubectl run --command -it --rm alfresco-installer \
-        --image registry.gitlab.westernacher.com/torsten.werner/acs-deployment/alfresco-installer:0.1 \
+        --image westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-installer:0.1 \
         --image-pull-policy Always --restart Never -- /alfresco-installer/alfresco-uninstaller.sh
