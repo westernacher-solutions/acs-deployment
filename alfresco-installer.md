@@ -48,7 +48,8 @@ Falls es neuere Versionen des Installers gibt, muss das Tag beim Image ggf. aktu
 
     kubectl run -it --rm alfresco-installer \
         --image westernacher-docker.artifactory.test.bnotk.net/com.westernacher.alfresco-installer:0.1 \
-        --restart Never -- --set externalProtocol="https" --set externalHost="95.217.1.233" --set externalPort="443" \
+        --restart Never --image-pull-policy Always -- \
+        --set externalProtocol="https" --set externalHost="95.217.1.233" --set externalPort="443" \
         --set imageprefix="westernacher-docker.artifactory.test.bnotk.net/com.westernacher."
 
 Sobald der Installer sich beendet hat, kann man mit folgendem Kommando den Status der Pods bzw. Container prüfen:
@@ -60,6 +61,13 @@ Die IP-Adresse ist natürlich wieder anzupassen.
 
 - Share: https://95.217.1.233:443/share
 - Content: https://95.217.1.233:443/alfresco
+
+Oder als Notbehelf über den API-Proxy:
+
+- kubectl cluster-info
+- kubectl config view
+- Share: https://95.216.147.152:16443/api/v1/namespaces/default/services/demo-alfresco-cs-share:share/proxy/share/
+- Content: https://95.216.147.152:16443/api/v1/namespaces/default/services/demo-alfresco-cs-repository:alfresco/proxy/alfresco/
 
 Die Password für den Benutzer _admin_ lautet _admin_.
 
