@@ -65,6 +65,7 @@ Die IP-Adresse ist natürlich wieder anzupassen.
 Oder als Notbehelf über den API-Proxy:
 
 - kubectl cluster-info
+- kubectl config view
 - Share: https://95.216.147.152:16443/api/v1/namespaces/default/services/demo-alfresco-cs-share:share/proxy/share/
 - Content: https://95.216.147.152:16443/api/v1/namespaces/default/services/demo-alfresco-cs-repository:alfresco/proxy/alfresco/
 
