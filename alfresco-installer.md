@@ -62,6 +62,12 @@ Die IP-Adresse ist natürlich wieder anzupassen.
 - Share: https://95.217.1.233:443/share
 - Content: https://95.217.1.233:443/alfresco
 
+Oder als Notbehelf über den API-Proxy:
+
+- kubectl cluster-info
+- Share: https://95.216.147.152:16443/api/v1/namespaces/default/services/demo-alfresco-cs-share:share/proxy/share/
+- Content: https://95.216.147.152:16443/api/v1/namespaces/default/services/demo-alfresco-cs-repository:alfresco/proxy/alfresco/
+
 Die Password für den Benutzer _admin_ lautet _admin_.
 
 # Deinstallation der Alfresco-Komponenten
